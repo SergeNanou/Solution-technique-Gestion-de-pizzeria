@@ -1,0 +1,73 @@
+@startuml
+
+class Client {
+  {field} Numclient: int
+          Nom: String
+          email : String
+          adresse 
+          tel
+
+  {method} changerCoordonnees()
+}
+class Commande{
+  {field} Numcommande: int
+          Date_commande: date
+          Date_preparation: date
+          Date_livraison: date
+          quantite: int
+  {method} calculerMontant()
+           viderPanier()
+           affecterPreparation()
+           enregistrerEtat()
+           affecterLivraison()
+}
+class Panier{
+  {field} nbreArticles: int
+          ref: int       
+  {method} ajouterLigne()
+           supprimerLigne()
+           enregistrerCommande()
+           modifierCommande()
+           viderPanier()
+}
+class Produit{
+  {field} designation: string
+          qteStock: int
+          ref: int
+
+  {method} retirer(qte)
+           ajouter(qte)
+           alarmeStockFaible()
+}
+class Pizza{
+  {field} ref: int
+          nom:string
+          prix: int
+
+  {method} modifierCatalogue()
+           consulterFormPizza()
+           modifierPrix()
+           selectionnerPizza()
+}
+class Personne{
+  {field} ref: int
+         
+
+  {method} seConnecter()
+           
+}
+Client "1" - "1" Panier 
+Client "1" - "*" Commande 
+Panier "1" - "1" Commande 
+Pizza   "*" - "*" Produit
+Produit   "*" - "1" Commande
+(Pizza, Produit) . Formule 
+Personne - Pizza
+Client --> Personne
+class Formule{
+  {field} ref: int
+          nom: string
+  {method} modifierFormule()
+}                          
+@enduml
+

@@ -1,0 +1,29 @@
+@startuml
+
+skinparam interface {
+  backgroundColor RosyBrown
+  borderColor orange
+}
+
+skinparam component {
+  FontSize 13
+  BackgroundColor<<Apache>> Red
+  BorderColor<<Apache>> #FF6655
+  FontName Courier
+  BorderColor black
+  BackgroundColor gold
+  ArrowFontName Impact
+  ArrowColor #FF6655
+  ArrowFontColor #777777
+}
+
+() "Facturation" as FA
+[Comptabilite] .> FA : use
+[Commande]  -- FA
+[Commande] -- () CreationCommande 
+CreationCommande ..> [Clients] : use
+PreparationCommande .> [Commande] : use
+LivraisonCommande -- [Shop]
+[Shop] -- PreparationCommande
+[Stock] .> PreparationCommande : use
+@enduml
