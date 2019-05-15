@@ -19,11 +19,11 @@ skinparam component {
 
 () "Facturation" as FA
 [Comptabilite] .> FA : use
-[Commande]  -- FA
-[Commande] -- () CreationCommande 
+[SystemeCommande]  -- FA
+[SystemeCommande] ..> CreationCommande : use
 CreationCommande ..> [Clients] : use
-PreparationCommande .> [Commande] : use
-LivraisonCommande -- [Shop]
-[Shop] -- PreparationCommande
-[Stock] .> PreparationCommande : use
+PreparationCommande .> [SystemeCommande] : use
+LivraisonCommande ..> [LogisticCommande] :use
+[LogisticCommande] -- PreparationCommande
+[InventaireStock] .> PreparationCommande : use
 @enduml

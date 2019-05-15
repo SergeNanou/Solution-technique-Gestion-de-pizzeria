@@ -1,0 +1,43 @@
+@startuml
+
+node PC_Client{
+ component Interface_Utilisateur{ 
+           folder EntreeCdeUI.exe         
+          
+ }          
+}
+
+cloud AWS {
+  node Serveur{
+                component SystemeCommande
+                component InventaireStock
+                component Comptabilite
+                component LogisticCommande
+                component InterfaceDB
+  }
+}
+
+database BASE_DE_DONNEES {
+  component EXE_SGBD
+  component Tables_BD
+}
+
+
+PC_Client "1..*" - "1" AWS
+BASE_DE_DONNEES "1" - "1" AWS 
+Interface_Utilisateur ..> SystemeCommande
+EXE_SGBD ..> Tables_BD
+InterfaceDB ..> EXE_SGBD
+SystemeCommande ..> InterfaceDB
+Comptabilite ..> SystemeCommande
+Comptabilite ..> InterfaceDB
+LogisticCommande ..> SystemeCommande
+LogisticCommande ..> InterfaceDB
+InventaireStock ..> SystemeCommande
+InventaireStock ..> InterfaceDB
+
+
+@enduml
+
+
+
