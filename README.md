@@ -10,6 +10,6 @@ Ce projet rentrait dans le cadre des activités d'un analyste programmeur:
 
 -identifier les différents éléments composant le système à mettre en place et leurs interactions
 
--décrire le déploiement des différents composants que vous envisagez
+-décrire le déploiement des différents composants à envisager
 
--élaborer le schéma de la ou des bases de données que vous comptez créer
+-élaborer le schéma de la ou des bases de données à créer
