@@ -1,40 +1,41 @@
 @startuml
 
-node PC_Client{
+node PC_Utilisateur{
  component Interface_Utilisateur{ 
-           folder EntreeCdeUI.exe         
-          
+           folder Interface_Web         
+           
  }          
 }
 
 cloud AWS {
   node Serveur{
-                component SystemeCommande
-                component InventaireStock
-                component Comptabilite
-                component LogisticCommande
-                component InterfaceDB
+                
+                
+                component [<<API>> \n Paypal]
+                component [<<API>> \n GoogleMaps]
+                
+                
+    [<<EXE>> \n SystemeCommande.EXE]  ..> [<<API>> \n Paypal]
+    [<<EXE>> \n SystemeCommande.EXE]  ..> [<<API>> \n GoogleMaps]
+    [<<EXE>> \n SystemeCommande.EXE]  ..> [<<fichier>> \n stock.cpp]
+    [<<EXE>> \n SystemeCommande.EXE]  ..> [<<fichiier>> \n  commande.cpp]
+    [<<EXE>> \n SystemeCommande.EXE]  ..> [<<fichiier>> \n  pizzeria.cpp]
+    [<<EXE>> \n SystemeCommande.EXE]  ..> [<<librairie>> \n InterfaceDB.dll]
   }
-}
-
-database BASE_DE_DONNEES {
+  database BASE_DE_DONNEES {
   component EXE_SGBD
   component Tables_BD
 }
+}
 
 
-PC_Client "1..*" - "1" AWS
-BASE_DE_DONNEES "1" - "1" AWS 
-Interface_Utilisateur ..> SystemeCommande
+
+
+
+
+PC_Utilisateur - AWS : TCP/IP
 EXE_SGBD ..> Tables_BD
-InterfaceDB ..> EXE_SGBD
-SystemeCommande ..> InterfaceDB
-Comptabilite ..> SystemeCommande
-Comptabilite ..> InterfaceDB
-LogisticCommande ..> SystemeCommande
-LogisticCommande ..> InterfaceDB
-InventaireStock ..> SystemeCommande
-InventaireStock ..> InterfaceDB
+[<<librairie>> \n InterfaceDB.dll] ..> EXE_SGBD
 
 
 @enduml

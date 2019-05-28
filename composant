@@ -16,14 +16,32 @@ skinparam component {
   ArrowColor #FF6655
   ArrowFontColor #777777
 }
+node SystemeCommande {
+  [<<bibliotheque>> \n ReconnaissanceIdentifiants]
+  [<<bibliotheque>> \n AccesInternet]
+}
 
-() "Facturation" as FA
-[Comptabilite] .> FA : use
-[SystemeCommande]  -- FA
-[SystemeCommande] ..> CreationCommande : use
-CreationCommande ..> [Clients] : use
-PreparationCommande .> [SystemeCommande] : use
-LivraisonCommande ..> [LogisticCommande] :use
-[LogisticCommande] -- PreparationCommande
-[InventaireStock] .> PreparationCommande : use
+
+ 
+SystemeCommande  -( Facturation
+Facturation --[<<API>> \n Paypal] 
+SystemeCommande  -( Localisation
+Localisation --[<<API>> \n GoogleMaps] 
+[PC Utilisateur \n Interface Web] -( Connexion
+Connexion --  SystemeCommande
+SystemeCommande  ..> [<<fichier>> \n stock.cpp]
+SystemeCommande  ..> [<<fichier>> \n commande.cpp]
+SystemeCommande ..> [<<fichier>> \n pizzeria.cpp]
+
+
 @enduml
+Preparation )- 
+[<<librairie>> \n Logistic.dll] -( Preparation
+Livraison -- [<<librairie>> \n Logistic.dll] 
+Preparation --[<<EXE>> \n SystemeCommande.EXE] 
+[PC CEO \n Interface Web] -( Preparation
+[PC CEO \n Interface Web] -( Livraison
+Preparation )- [PC Cuisinier \n Interface Web]
+Livraison --  [<<EXE>> \n SystemeCommande.EXE]
+
+Livraison )-  [PC Livreur \n Interface Web]

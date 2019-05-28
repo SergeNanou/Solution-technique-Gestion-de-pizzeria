@@ -1,0 +1,10 @@
+insert into Commande (id, client, prix) values (1, 1, 25);
+insert into Commande (id, client, prix) values (2, 2, 25);
+insert into Commande (id, client, prix) values (3, 3, 30);
+insert into Commande (id, client, prix) values (4, 4, 30);
+insert into Commande (id, client, prix) values (5, 5, 15);
+insert into Commande (id, client, prix) values (6, 6, 45);
+insert into Commande (id, client, prix) values (7, 7, 25);
+insert into Commande (id, client, prix) values (8, 8, 25);
+insert into Commande (id, client, prix) values (9, 9, 25);
+insert into Commande (id, client, prix) values (10, 10, 25);
