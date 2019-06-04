@@ -65,10 +65,14 @@ while True:
 				piz_choice = 1
 				if choice_3 == 1:
 
-					liste=['UPDATE Stock SET stock_ing = stock_ing - 0.15 WHERE pizzeria_id = 1 and ingredient_id = 1',
-					       'UPDATE Stock SET stock_ing = stock_ing - 0.15 WHERE pizzeria_id = 1 and ingredient_id = 2',
-					       'UPDATE Stock SET stock_ing = stock_ing - 0.55 WHERE pizzeria_id = 1 and ingredient_id = 3',
-					       'UPDATE Stock SET stock_ing = stock_ing - 0.35 WHERE pizzeria_id = 1 and ingredient_id = 4']
+					liste=['UPDATE Stock SET stock_ing = stock_ing - 0.15 \
+					WHERE pizzeria_id = 1 and ingredient_id = 1',
+					       'UPDATE Stock SET stock_ing = stock_ing - 0.15 \
+					       WHERE pizzeria_id = 1 and ingredient_id = 2',
+					       'UPDATE Stock SET stock_ing = stock_ing - 0.55 \
+					       WHERE pizzeria_id = 1 and ingredient_id = 3',
+					       'UPDATE Stock SET stock_ing = stock_ing - 0.35 \
+					       WHERE pizzeria_id = 1 and ingredient_id = 4']
 					for s in liste:
 						bd.cursor.execute(s)
 					
@@ -91,19 +95,12 @@ while True:
 				print(prix)
 				print(price)
 				bd.cursor.execute('REPLACE into Commande (id,client,prix) values (%s,%s,%s)',(com_id,10,price,))
-				result = bd.cursor.execute('SELECT * FROM Stock')
-				result = bd.cursor.fetchall()
-				for x in result:
-					print(x)
+				# result = bd.cursor.execute('SELECT * FROM Stock')
+				# result = bd.cursor.fetchall()
+				# for x in result:
+				# 	print(x)
 				print("le prix de votre commande est :", price , "£")
-				# bd.cursor.execute('INSERT into Selection (commande_id,pizzeria_id) values (%s,%s)',(com_id,1,))
-				# req = 'CREATE TRIGGER after_insert_Save AFTER INSERT \
-				# 	ON Save FOR EACH ROW \
-				# 	BEGIN \
-				# 	UPDATE Stock SET stock_ing = stock_ing - 1\
-				# 	WHERE pizzeria_id = 1 and ingredient_id = %s \
-				# 	;END'
-				# bd.cursor.execute(req)
+				
 				
 				break
 			
@@ -121,15 +118,16 @@ while True:
 		bd.cursor.execute('SELECT name, adresse,deliver FROM Client,commande WHERE client.id = commande.client and commande.cooker = 0 and client.id = 10')
 		result_0 = bd.cursor.fetchall()
 		print("nom_du_client:", result_0[0][0], '\n', "adresse: ", result_0[0][1], "etat_de_la_livrraison: ", result_0[0][2])
-		if result_0[0][2] == 1:
+		if result_0[0][2] == 0:
 			use = input('Tapez 1 si vous voulez enregistrez la livraison commande: ')
 			use = int(use)
-			if use == 1:
+			if use == 0:
 				bd.cursor.execute('UPDATE Commande SET deliver = 0 WHERE Commande.Client=10')
 				print('la commande a bien été livré')
 			
 				break
 			else:
+				print("\n","Bon courage pour vos services de livraisons")
 				break
 		break
 	elif choice_0 == 3:
@@ -169,13 +167,7 @@ while True:
 			break
 
 		break
-# Creating the interface object with the database:
 
-
-#bd.cursor.execute('SHOW TABLES')
-#result = bd.cursor.fetchall()
-#for x in result:
-	#print(x)
 
 bd.baseDonn.commit()
 bd.cursor.close()
